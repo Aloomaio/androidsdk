@@ -101,13 +101,12 @@ uploadArchives {
         pom.project {
             name project.name
             packaging 'aar'
-            description 'An Android library for Mixpanel Analytics \n' +
-                    'http://mixpanel.com/android-analytics/'
-            url 'https://github.com/mixpanel/mixpanel-android'
+            description 'An Alooma Analytics Android library based on  Mixpanel SDK'
+            url 'https://github.com/Aloomaio/alooma-mixpanel-android'
             scm {
-                url 'http://github.com/mixpanel/mixpanel-android'
-                connection 'scm:git:http://github.com/mixpanel/mixpanel-android'
-                developerConnection 'scm:git:git@github.com:mixpanel/mixpanel-android.git'
+                url 'scm:git:git@github.com:aloomaio/alooma-mixpanel-android'
+                connection 'scm:git:git@github.com:aloomaio/alooma-mixpanel-android'
+                developerConnection 'scm:git:git@github.com:aloomaio/alooma-mixpanel-android.git'
             }
             licenses {
                 license {
@@ -118,14 +117,9 @@ uploadArchives {
             }
             developers {
                 developer {
-                    id 'jbwyme'
-                    name 'Josh Wymer'
-                    email 'josh@mixpanel.com'
-                }
-                developer {
-                    id 'joeatwork'
-                    name 'Joe Bowers'
-                    email 'joe@mixpanel.com'
+                    id 'alex.shacked'
+                    name 'Alex Shacked'
+                    email 'alex@alooma.io'
                 }
             }
         }
@@ -133,6 +127,8 @@ uploadArchives {
         pom.whenConfigured { pom ->
             pom.dependencies*.optional = true
         }
+
+        println "sonatypeUsername: " + project.hasProperty("sonatypeUsername")
 
         if (isReleaseVersion() && project.hasProperty("sonatypeUsername")) {
             /**
@@ -160,4 +156,3 @@ uploadArchives {
 
     }
 }
-
