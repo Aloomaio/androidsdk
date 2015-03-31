@@ -1,0 +1,6 @@
+<<<<<<< HEAD
+group = com.alooma.android
+=======
+group = com.github.aloomaio
+>>>>>>> master
+version = 4.5.3

@@ -20,11 +20,11 @@ android {
         // the relevant attributes of the <uses-sdk> tag in AndroidManifest.xml
         minSdkVersion 9
         targetSdkVersion 21
-        testApplicationId "com.mixpanel.android.mpmetrics"
+        testApplicationId "com.alooma.android.mpmetrics"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
 
         lintOptions {
-            abortOnError true
+            abortOnError false
             warningsAsErrors true
         }
     }
@@ -117,9 +117,9 @@ uploadArchives {
             }
             developers {
                 developer {
-                    id 'alex.shacked'
-                    name 'Alex Shacked'
-                    email 'alex@alooma.io'
+                    id 'asdasd'
+                    name 'Asd asd'
+                    email 'info@alooma.com'
                 }
             }
         }
@@ -133,7 +133,7 @@ uploadArchives {
         if (isReleaseVersion() && project.hasProperty("sonatypeUsername")) {
             /**
              * In order to do nexus deploys, you'll need to setup a gradle.properties file in $HOME/.gradle
-             * with the following properties. You'll need the mixpanel.key file and then import it using GnuPG
+             * with the following properties. You'll need the alooma.key file and then import it using GnuPG
              * which will provide you with the keyId and the secring.gpg file
              * signing.keyId=
              * signing.password=

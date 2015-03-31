@@ -1,0 +1,7 @@
+include ':tester'
+include ":"
+<<<<<<< HEAD
+rootProject.name = "alooma-android"
+=======
+rootProject.name = "alooma-mixpanel-android"
+>>>>>>> master
