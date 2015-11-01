@@ -48,7 +48,7 @@ import java.util.Map;
      * Do not call directly. You should call AnalyticsMessages.getInstance()
      */
     /* package */ AnalyticsMessages(final Context context) {
-        this(context, "alooma.alooma.io")
+        this(context, "alooma.alooma.io");
     }
 
     /**
