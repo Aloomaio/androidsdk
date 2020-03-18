@@ -14,6 +14,7 @@ import android.test.mock.MockPackageManager;
 
 import com.github.aloomaio.androidsdk.test.BuildConfig;
 import com.github.aloomaio.androidsdk.util.Base64Coder;
+import com.github.aloomaio.androidsdk.util.HttpService;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -289,7 +290,7 @@ public class MixpanelBasicTest extends AndroidTestCase {
         mockAdapter.cleanupEvents(Long.MAX_VALUE, ADbAdapter.Table.EVENTS);
         mockAdapter.cleanupEvents(Long.MAX_VALUE, ADbAdapter.Table.PEOPLE);
 
-        final ServerMessage mockPoster = new ServerMessage() {
+        final HttpService mockPoster = new HttpService() {
             @Override
             public byte[] performRequest(String endpointUrl, List<NameValuePair> nameValuePairs) {
                 final boolean isIdentified = isIdentifiedRef.get();
@@ -359,7 +360,7 @@ public class MixpanelBasicTest extends AndroidTestCase {
             }
 
             @Override
-            protected ServerMessage getPoster() {
+            protected HttpService getPoster() {
                 return mockPoster;
             }
         };
@@ -793,7 +794,7 @@ public class MixpanelBasicTest extends AndroidTestCase {
     }
 
     public void testAlias() {
-        final ServerMessage mockPoster = new ServerMessage() {
+        final HttpService mockPoster = new HttpService() {
             @Override
             public byte[] performRequest(String endpointUrl, List<NameValuePair> nameValuePairs) {
                 try {
@@ -815,7 +816,7 @@ public class MixpanelBasicTest extends AndroidTestCase {
 
         final AnalyticsMessages listener = new AnalyticsMessages(getContext()) {
             @Override
-            protected ServerMessage getPoster() {
+            protected HttpService getPoster() {
                 return mockPoster;
             }
         };

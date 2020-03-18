@@ -1,9 +1,11 @@
-package com.github.aloomaio.androidsdk.aloomametrics;
+package com.github.aloomaio.androidsdk.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+
+import com.github.aloomaio.androidsdk.aloomametrics.AConfig;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -18,8 +20,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
-/* package */ class ServerMessage {
+public class HttpService implements RemoteService {
 
     public boolean isOnline(Context context) {
         boolean isOnline;
@@ -48,7 +51,7 @@ import java.util.List;
         byte[] response = null;
         for (String url : urls) {
             try {
-                response = performRequest(url, null);
+                response = performRequest(url, null, null);
                 break;
             } catch (final MalformedURLException e) {
                 Log.e(LOGTAG, "Cannot interpret " + url + " as a URL.", e);
@@ -65,7 +68,11 @@ import java.util.List;
         return response;
     }
 
-    public byte[] performRequest(String endpointUrl, List<NameValuePair> params) throws IOException {
+    public byte[] performRequest(
+            String endpointUrl,
+            List<NameValuePair> params,
+            Map<String, String> headers
+    ) throws IOException {
         if (AConfig.DEBUG) {
             Log.v(LOGTAG, "Attempting request to " + endpointUrl);
         }
@@ -88,7 +95,14 @@ import java.util.List;
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setConnectTimeout(2000);
                 connection.setReadTimeout(10000);
-                if (null != params) {
+
+                if (headers != null){
+                    for (Map.Entry<String, String> header: headers.entrySet()){
+                        connection.setRequestProperty(header.getKey(), header.getValue());
+                    }
+                }
+
+                if (params != null) {
                     connection.setDoOutput(true);
                     final UrlEncodedFormEntity form = new UrlEncodedFormEntity(params, "UTF-8");
                     connection.setRequestMethod("POST");

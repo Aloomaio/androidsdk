@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.test.AndroidTestCase;
 
+import com.github.aloomaio.androidsdk.util.HttpService;
 import com.github.aloomaio.androidsdk.viewcrawler.UpdatesFromMixpanel;
 
 import org.apache.http.NameValuePair;
@@ -55,7 +56,7 @@ public class DecideFunctionalTest extends AndroidTestCase {
         };
 
         mExpectations = new Expectations();
-        mMockPoster = new ServerMessage() {
+        mMockPoster = new HttpService() {
             @Override
             public byte[] performRequest(String endpointUrl, List<NameValuePair> nameValuePairs) {
                 return mExpectations.setExpectationsRequest(endpointUrl, nameValuePairs);
@@ -71,7 +72,7 @@ public class DecideFunctionalTest extends AndroidTestCase {
 
         mMockMessages = new AnalyticsMessages(getContext()) {
             @Override
-            protected ServerMessage getPoster() {
+            protected HttpService getPoster() {
                 return mMockPoster;
             }
 
@@ -330,6 +331,6 @@ public class DecideFunctionalTest extends AndroidTestCase {
     private AConfig mMockConfig;
     private Future<SharedPreferences> mMockPreferences;
     private Expectations mExpectations;
-    private ServerMessage mMockPoster;
+    private HttpService mMockPoster;
     private AnalyticsMessages mMockMessages;
 }

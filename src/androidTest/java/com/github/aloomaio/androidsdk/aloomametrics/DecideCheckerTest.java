@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.test.AndroidTestCase;
 
+import com.github.aloomaio.androidsdk.util.HttpService;
 import com.github.aloomaio.androidsdk.viewcrawler.UpdatesFromMixpanel;
 
 import org.json.JSONArray;
@@ -322,7 +323,7 @@ public class DecideCheckerTest extends AndroidTestCase {
         }
     }
 
-    private static class MockPoster extends ServerMessage {
+    private static class MockPoster extends HttpService {
         @Override
         public byte[] getUrls(Context context, String[] urls) {
             requestedUrls = urls;

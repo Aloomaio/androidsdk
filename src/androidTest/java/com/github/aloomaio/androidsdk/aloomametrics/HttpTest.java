@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.test.AndroidTestCase;
 
 import com.github.aloomaio.androidsdk.util.Base64Coder;
+import com.github.aloomaio.androidsdk.util.HttpService;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -32,7 +33,7 @@ public class HttpTest extends AndroidTestCase {
         mCleanupCalls = new ArrayList<String>();
         mDecideResults = new ArrayList<Object>();
 
-        final ServerMessage mockPoster = new ServerMessage() {
+        final HttpService mockPoster = new HttpService() {
             @Override
             public byte[] performRequest(String endpointUrl, List<NameValuePair> nameValuePairs) throws IOException {
                 try {
@@ -122,7 +123,7 @@ public class HttpTest extends AndroidTestCase {
             }
 
             @Override
-            protected ServerMessage getPoster() {
+            protected HttpService getPoster() {
                 return mockPoster;
             }
 
